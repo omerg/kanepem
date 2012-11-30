@@ -1,0 +1,79 @@
+CREATE DATABASE uniWorks
+
+-- COMPLETE------------------------
+CREATE TABLE IF NOT EXISTS account IF NOT CREATED(
+id INTEGER NOT NULL AUTO_INCREMENT,
+username VARCHAR(50) NOT NULL,
+password VARCHAR(50) NOT NULL,
+UNIQUE(username, password),
+PRIMARY KEY(id)
+);
+
+INSERT INTO account(username, password)
+VALUES ("admin", "admin");
+
+
+CREATE TABLE IF NOT EXISTS location(
+id INTEGER NOT NULL AUTO_INCREMENT,
+location_name VARCHAR(50) NOT NULL,
+address VARCHAR(50),
+latitude FLOAT(9,6),
+longitude FLOAT(9,6),
+PRIMARY KEY(id)
+);
+
+-- POPULATE THE LOCATION FIELD --------------------
+INSERT INTO location
+VALUES (null, "yer_1", "adres_1", 34.4, 114.1);
+
+INSERT INTO location
+VALUES (null, "yer_2", "adres_2", 34.6, 112.8);
+
+-- GET THE LOCATIONS THAT ARE INSIDE THE GIVEN RECTANGLE---
+DELIMITER //
+CREATE PROCEDURE getVisible( IN lat_1 FLOAT(9,6),
+                             IN lng_1 FLOAT(9,6),
+                             IN lat_2 FLOAT(9,6),
+                             IN lng_2 FLOAT(9,6))
+
+-- since latitude between -180 and 180 and longitude between
+-- -90 and 90 are actually continouous, we have to handle
+-- misleading cases
+  BEGIN
+    IF lat_1 < lat_2 AND
+       lng_1 < lng_2 THEN (
+      SELECT *
+		  FROM location
+		  WHERE latitude BETWEEN lat_1 AND lat_2
+		  AND longitude BETWEEN lng_1 AND lng_2
+    );
+    ELSEIF lat_1 < lat_2 AND
+           lng_1 > lng_2 THEN (
+      SELECT *
+		  FROM location
+		  WHERE latitude BETWEEN lat_1 AND lat_2
+		  AND longitude NOT BETWEEN lng_1 AND lng_2
+    );
+    ELSEIF lat_1 > lat_2 AND
+           lng_1 < lng_2 THEN (
+      SELECT *
+		  FROM location
+		  WHERE latitude NOT BETWEEN lat_1 AND lat_2
+		  AND longitude BETWEEN lng_1 AND lng_2
+    );
+    ELSEIF lat_1 > lat_2 AND
+           lng_1 > lng_2 THEN (
+      SELECT *
+		  FROM location
+		  WHERE latitude BETWEEN lat_1 AND lat_2
+		  AND longitude BETWEEN lng_1 AND lng_2
+    );
+    ELSE (
+      SELECT *
+		  FROM location
+		  WHERE latitude BETWEEN lat_1 AND lat_2
+		  AND longitude BETWEEN lng_1 AND lng_2
+    );
+    END IF;
+  END //
+DELIMITER;
