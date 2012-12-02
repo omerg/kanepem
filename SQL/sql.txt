@@ -1,0 +1,144 @@
+CREATE DATABASE kanepem
+
+-- COMPLETE------------------------
+
+DROP TABLE IF EXISTS `account`;
+CREATE TABLE  `account` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `profile_id` int(11) DEFAULT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `tm` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `activationkey` varchar(100),
+  `status` varchar(50) NOT NULL DEFAULT 'verify',
+  `facebook` tinyint(1),
+  `fb_uid` varchar(45),
+  `cookie` char(32),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`,`password`)
+);
+
+CREATE TABLE IF NOT EXISTS profile(
+id INTEGER NOT NULL AUTO_INCREMENT,
+user_id INTEGER NOT NULL,
+picture_url VARCHAR(200),
+thumbnail_url VARCHAR(200),
+name VARCHAR(50),
+surname VARCHAR(50),
+description VARCHAR(500),
+UNIQUE(user_id),
+PRIMARY KEY(id),
+FOREIGN KEY (user_id)
+REFERENCES account(id)
+ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS follow(
+id INTEGER NOT NULL AUTO_INCREMENT,
+follower_id INTEGER NOT NULL,
+follows_id INTEGER NOT NULL,
+`tm` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+PRIMARY KEY(id),
+FOREIGN KEY (follower_id)
+REFERENCES account(id)
+ON DELETE CASCADE,
+FOREIGN KEY (follows_id)
+REFERENCES account(id)
+ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS message(
+id INTEGER NOT NULL AUTO_INCREMENT,
+from_id INTEGER NOT NULL,
+to_id INTEGER NOT NULL,
+readState VARCHAR (10) DEFAULT 'unread',
+tm timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+subject VARCHAR(50) DEFAULT '',
+message VARCHAR(50) DEFAULT '',
+PRIMARY KEY(id)
+);
+
+CREATE TABLE IF NOT EXISTS item(
+id INTEGER NOT NULL AUTO_INCREMENT,
+owner_id INTEGER NOT NULL,
+item_type VARCHAR(50),
+street_address VARCHAR(50),
+postcode INTEGER,
+city VARCHAR(50),
+phone VARCHAR(50),
+email VARCHAR(50),
+src_lat FLOAT(9,6),
+src_lng FLOAT(9,6),
+dst_lat FLOAT(9,6),
+dst_lng FLOAT(9,6),
+start_date DATETIME default NULL,
+end_date DATETIME default NULL,
+title VARCHAR(50),
+description VARCHAR(50),
+features INT(3) unsigned zerofill NOT NULL,
+tm timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+PRIMARY KEY(id),
+FOREIGN KEY (owner_id)
+REFERENCES account(id)
+ON DELETE CASCADE
+);
+
+/*-- POPULATE THE LOCATION FIELD --------------------
+INSERT INTO location
+VALUES (null, "yer_1", "adres_1", 34.4, 114.1);
+
+INSERT INTO location
+VALUES (null, "yer_2", "adres_2", 34.6, 112.8);
+*/
+/*deprecated
+-- GET THE LOCATIONS THAT ARE INSIDE THE GIVEN RECTANGLE---
+DELIMITER //
+CREATE PROCEDURE getVisible( IN lat_1 FLOAT(9,6),
+                             IN lng_1 FLOAT(9,6),
+                             IN lat_2 FLOAT(9,6),
+                             IN lng_2 FLOAT(9,6))
+
+-- since latitude between -180 and 180 and longitude between
+-- -90 and 90 are actually continouous, we have to handle
+-- misleading cases
+  BEGIN
+    IF lat_1 < lat_2 AND
+       lng_1 < lng_2 THEN (
+      SELECT *
+		  FROM location
+		  WHERE latitude BETWEEN lat_1 AND lat_2
+		  AND longitude BETWEEN lng_1 AND lng_2
+    );
+    ELSEIF lat_1 < lat_2 AND
+           lng_1 > lng_2 THEN (
+      SELECT *
+		  FROM location
+		  WHERE latitude BETWEEN lat_1 AND lat_2
+		  AND longitude NOT BETWEEN lng_1 AND lng_2
+    );
+    ELSEIF lat_1 > lat_2 AND
+           lng_1 < lng_2 THEN (
+      SELECT *
+		  FROM location
+		  WHERE latitude NOT BETWEEN lat_1 AND lat_2
+		  AND longitude BETWEEN lng_1 AND lng_2
+    );
+    ELSEIF lat_1 > lat_2 AND
+           lng_1 > lng_2 THEN (
+      SELECT *
+		  FROM location
+		  WHERE latitude BETWEEN lat_1 AND lat_2
+		  AND longitude BETWEEN lng_1 AND lng_2
+    );
+    ELSE (
+      SELECT *
+		  FROM location
+		  WHERE latitude BETWEEN lat_1 AND lat_2
+		  AND longitude BETWEEN lng_1 AND lng_2
+    );
+    END IF;
+  END
+ //
+DELIMITER;
+*/
