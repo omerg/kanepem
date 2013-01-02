@@ -39,7 +39,7 @@ require_once('connect_db.php');
 //data related to phpMailer
 require_once('PHPMailer/class.phpmailer.php');
 define('GUSER', 'kanepem.org@gmail.com'); // Gmail username
-define('GPWD', 'opeth293'); // Gmail password
+define('GPWD', 'qwe321123'); // Gmail password
 
 /*! @class get_visible_items
  *@abstract returns an array of items whose coordinates
@@ -309,12 +309,12 @@ function smtpmailer($to, $subject, $body) {
 	$mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for Gmail
 	$mail->Host = 'smtp.gmail.com';
 	$mail->Port = 465; 
-	$mail->Username = GUSER;  
-	$mail->Password = GPWD;           
+	$mail->Username = 'kanepem.org@gmail.com';  
+	$mail->Password = 'qwe321123';           
 	//$mail->SetFrom($from, $from_name);
-	$mail->SetFrom("noreply@kanepem.org" , "kanepem.org");
+	$mail->SetFrom("nor'eply@kanepem.org" , "kanepem.org");
 	$mail->Subject = $subject;
-	$mail->Body = $body;
+	$mail->Body = $body; 
 	$mail->AddAddress($to);
 	if(!$mail->Send()) {
 		$error = 'Mail error: '.$mail->ErrorInfo; 
