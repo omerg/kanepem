@@ -1,0 +1,9 @@
+Konfigürasyon detayları
+
+1 - path.php dosyasında absolute path güncellenir
+2 - .htacces dosyalarında absolute path guncellenir - profile, item, 
+3 - includes/config.php içinde mysql login detayları belirlenir
+4 - includes/facebook.php içinde facebook detayları belirlenir
+5 - map/index.php içinde Google Maps Key belirlenir
+6 - fb.php içinde facebook detayları belirlenir 
+7 - includes/functions içinde SMTP yetki bilgileri girilir

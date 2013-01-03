@@ -1,0 +1,161 @@
+html {
+width:800px;
+}
+
+body {
+background:none repeat scroll 0 0 transparent;
+border:0 none;
+}
+
+#frame-content {
+padding:20px;
+}
+
+#frame-content #content-title {
+background-image:url("../../../../images/user_header_bg.jpg");
+color:white;
+height:50px;
+left:0;
+padding-bottom:0;
+position:absolute;
+top:0;
+width:800px;
+z-index:100;
+}
+
+#frame-content #form-content {
+height:360px;
+left:0;
+overflow:auto;
+padding:20px;
+position:absolute;
+top:50px;
+width:760px;
+}
+
+#frame-content #form-actions {
+background-image:url("../../../../images/user_header_bg.jpg");
+color:white;
+height:50px;
+left:0;
+position:absolute;
+top:450px;
+width:800px;
+z-index:100;
+}
+
+#frame-content h2 {
+bottom:13px;
+font-size:20px;
+left:20px;
+line-height:24px;
+position:absolute;
+}
+
+#content-title a {
+bottom:10px;
+color:white;
+display:block;
+font-weight:bold;
+line-height:18px;
+position:absolute;
+right:20px;
+}
+
+.content-form .form-entry {
+clear:left;
+margin-bottom:15px;
+}
+
+.content-form .form-label {
+font-weight:bold;
+margin-bottom:5px;
+}
+
+.mandatory {
+background-image:url("../../../../images/mandatory.gif");
+background-position:right center;
+background-repeat:no-repeat;
+padding-right:12px;
+}
+
+textarea {
+height:100px;
+width:413px;
+}
+
+#form-entry-features {
+left:460px;
+position:absolute;
+top:25px;
+width:320px;
+}
+
+#frame-content #form-actions-entries {
+padding-left:20px;
+padding-top:13px;
+}
+
+.form-submit input, .form-button input {
+background-image:url("../../../../images/form_submit_bg.gif");
+background-repeat:repeat-x;
+border-color:#999999 #666666 #666666 #999999;
+border-style:solid;
+border-width:1px;
+color:#333333;
+cursor:pointer;
+font-weight:bold;
+height:24px;
+padding:2px 10px 4px;
+}
+
+#entry-address input, #entry-email input, #entry-www input, #entry-lunch input {
+width:407px;
+}
+
+#entry-city{
+clear:none;
+float:left;
+width:195px;
+}
+
+#entry-postcode, #entry-phone {
+float:left;
+width:215px;
+}
+
+.category-small-list {
+padding-bottom:0;
+}
+
+.category-small {
+height:30px;
+margin-bottom:5px;
+}
+
+.category-small-description  {
+color:#666666;
+font-size:11px;
+font-weight:normal;
+}
+
+.category-small label {
+font-weight:bold;
+padding-bottom:2px;
+}
+
+#add-item-progress {
+height:200px;
+text-align:center;
+display:none;
+}
+
+#loading-text {
+left:370px;
+position:absolute;
+top:230px;
+}
+
+#map-hand-controls {
+clear:both;
+}

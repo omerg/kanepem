@@ -1,0 +1,43 @@
+#hand_b {
+  width:31px;
+  height:31px;
+  background-image: url(http://google.com/mapfiles/ms/t/Bsu.png);
+  float:left;
+  margin:1px;
+}
+#hand_b.selected {
+  background-image: url(http://google.com/mapfiles/ms/t/Bsd.png);
+}
+
+#placemark_b {
+  width:31px;
+  height:31px;
+  background-image: url(http://google.com/mapfiles/ms/t/Bmu.png);
+  float:left;
+  margin:1px;
+}
+#placemark_b.selected {
+  background-image: url(http://google.com/mapfiles/ms/t/Bmd.png);
+}
+
+#line_b {
+  width:31px;
+  height:31px;
+  background-image: url(http://google.com/mapfiles/ms/t/Blu.png);
+  float:left;
+  margin:1px;
+}
+#line_b.selected {
+  background-image: url(http://google.com/mapfiles/ms/t/Bld.png);
+}
+
+#shape_b {
+  width:31px;
+  height:31px;
+  background-image: url(http://google.com/mapfiles/ms/t/Bpu.png);
+  float:left;
+  margin:1px;
+}
+#shape_b.selected {
+  background-image: url(http://google.com/mapfiles/ms/t/Bpd.png);
+}

@@ -1,0 +1,48 @@
+#content-main {
+padding:40px 170px;
+}
+
+#content-main h2 {
+font-size:18px;
+font-weight:bold;
+padding-top:23px;
+}
+
+#content-title {
+padding-bottom:20px;
+}
+
+.content-iframe{
+height:620px;
+overflow:auto;
+position:relative;
+width:100%;
+}
+
+.content-form .form-helptext {
+font-size:14px;
+line-height:20px;
+margin-bottom:15px;
+}
+
+.content-form .form-label {
+font-weight:bold;
+margin-bottom:5px;
+}
+
+.content-form .form-entry {
+clear:left;
+margin-bottom:15px;
+}
+
+.form-text input, .form-password input, .form-select select {
+margin:0;
+padding:3px;
+position:relative;
+width:auto;
+}
+
+.content-form .form-help {
+color:#666666;
+font-size:11px;
+}

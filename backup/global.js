@@ -41,23 +41,80 @@ eat.main={	init:function(){eat.main.decor.init();eat.main.form.init();eat.main.t
 };
 jQuery(document).ready(function(){eat.main.init()});
 eat.adsGlobal={click:function(A){$.ajax({type:"POST",url:eat.settings.adsClickUrl,data:"ad="+A,success:function(B){document.location=B}})}};
-eat.header={init:function(){this.messages.init();this.userbar.init();this.search.init()},
-			messages:{	firstRun:true,
-						index:0,
-						init:function(){var A=this;this.index=this.getRandom();$("#messagebar .entry:eq("+this.index+")").show();window.setInterval(function(){A.nextMessage()},30000)},
-						nextMessage:function(){var A=this;$("#messagebar .entry:eq("+eat.header.messages.index+")").fadeOut(2000,function(){if($("#messagebar .entry").length-1==A.index){A.index=0}else{A.index++}$("#messagebar .entry:eq("+A.index+")").fadeIn(2000)})},
-						getRandom:function(){return Math.floor(Math.random()*$("#messagebar .entry").length)}
-			},
-			userbar:{	data:{	username:null,
-								profile:null
-						},
-						dom:{},
-						init:function(){this.dom.loggedin=$("#userbar .loggedin");this.dom.unlogged=$("#userbar .unlogged");this.dom.profile=$("#userbar-profile")},
-						render:function(){if(this.data.username&&this.data.profile){this.dom.unlogged.hide();this.dom.loggedin.show();var A=this.dom.profile.html();this.dom.profile.html('<a href="'+this.data.profile+'">'+A+" "+this.data.username+"</a>")}else{this.dom.loggedin.hide();this.dom.unlogged.show()}}
-			},
-			search:{dom:{},
-					init:function(){this.dom.input=$("#search_text");this.dom.button=$("#search_button");this.render()},
-					render:function(){var A=this;this.dom.input.bind("focus",function(){if(A.dom.input.is(".dimmed")){A.dom.input.val("");A.dom.input.removeClass("dimmed")}A.dom.button.removeClass("disabled");A.dom.button.attr("disabled",false)}).addClass("dimmed").val(__("common.header.search.defaultText"));this.dom.input.bind("blur",function(){if(A.dom.input.val()==""){A.dom.input.addClass("dimmed");A.dom.input.val(__("common.header.search.defaultText"));A.dom.button.addClass("disabled");A.dom.button.attr("disabled",true)}})}
-			}
+
+eat.header={
+	init:function(){
+		this.messages.init();
+		this.userbar.init();
+		this.search.init()},
+	messages:{	firstRun:true,
+				index:0,
+				init:function(){
+					var A=this;
+					this.index=this.getRandom();
+					$("#messagebar .entry:eq("+this.index+")").show();
+					window.setInterval(function(){
+												A.nextMessage()},30000)
+				},
+				nextMessage:function(){
+								var A=this;
+								$("#messagebar .entry:eq("+eat.header.messages.index+")").fadeOut(2000,function(){
+																												if($("#messagebar .entry").length-1==A.index){
+																													A.index=0
+																												}else{
+																													A.index++
+																												}
+																												$("#messagebar .entry:eq("+A.index+")").fadeIn(2000)})},
+				getRandom:function(){
+					return Math.floor(Math.random()*$("#messagebar .entry").length)
+				}
+	},
+	userbar:{	data:{	username:null,
+						profile:null
+				},
+				dom:{},
+				init:function(){
+					this.dom.loggedin=$("#userbar .loggedin");
+					this.dom.unlogged=$("#userbar .unlogged");
+					this.dom.profile=$("#userbar-profile")
+				},
+				render:function(){
+					if(this.data.username&&this.data.profile){
+						this.dom.unlogged.hide();
+						this.dom.loggedin.show();
+						var A=this.dom.profile.html();
+						this.dom.profile.html('<a href="'+this.data.profile+'">'+A+" "+this.data.username+"</a>")
+					}else{
+						this.dom.loggedin.hide();
+						this.dom.unlogged.show()
+					}
+				}
+	},
+	search:{	dom:{},
+				init:function(){
+					this.dom.input=$("#search_text");
+					this.dom.button=$("#search_button");
+					this.render()},
+				render:function(){
+					var A=this;
+					this.dom.input.bind("focus",function(){
+															if(A.dom.input.is(".dimmed")){
+																A.dom.input.val("");
+																A.dom.input.removeClass("dimmed")
+															}	
+															A.dom.button.removeClass("disabled");
+															A.dom.button.attr("disabled",false)
+															}).addClass("dimmed").val(__("common.header.search.defaultText"));
+					this.dom.input.bind("blur",function(){
+															if(A.dom.input.val()==""){
+																A.dom.input.addClass("dimmed");
+																A.dom.input.val(__("common.header.search.defaultText"));
+																A.dom.button.addClass("disabled");
+																A.dom.button.attr("disabled",true)
+															}
+														})
+		}
+	}
 };
+
 jQuery(document).ready(function(){eat.header.init()});

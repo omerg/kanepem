@@ -1,0 +1,12 @@
+AddCharset UTF-8 .php
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /~cms/uniWorks/item/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([0-9]+) index.php?item=$1 [L]
+RewriteRule ^(car) items.php?type=car [L]
+RewriteRule ^(home) items.php?type=house [L]
+</IfModule>
+

@@ -1,4 +1,3 @@
-//create class for icons
 function ngIcon(A,E,F,B,D,C){
 	this.zIndex_=F;
 	this.point_=A;
@@ -6,8 +5,6 @@ function ngIcon(A,E,F,B,D,C){
 	this.href_=B;
 	this.icon_=D;
 	this.html_=C}
-
-//custom overlay for icons
 ngIcon.prototype=new GOverlay();
 ngIcon.prototype.initialize=function(map){
 	this.map_=map;
@@ -1242,8 +1239,12 @@ eat.area.location={	openLocation:null,
 					init:function(){
 								var A=this;
 								$("body").bind("click",function(){A.closeControls()});
-								$("#location-navi li").bind("mouseover",function(){$(this).addClass("hover")}).bind("mouseout",function(){$(this).removeClass("hover")});
-								$("#location-navi-city").bind("click",function(B){A.openControls(this,"location-city");B.stopPropagation()});
+								$("#location-navi li")	.bind("mouseover",function(){$(this).addClass("hover")})
+														.bind("mouseout",function(){$(this).removeClass("hover")});
+								$("#location-navi-city").bind("click",function(B){	
+																A.openControls(this,"location-city");
+																B.stopPropagation()
+															});
 								$("#location-navi-presets").bind("click",function(B){
 																A.openControls(this,"location-presets");
 																B.stopPropagation()
@@ -1255,11 +1256,8 @@ eat.area.location={	openLocation:null,
 								if("geolocation" in navigator){
 									$("#location-navi-current").show()
 								}
-								$("#location-presets li, #location-city li").bind("mouseover",function(){
-																			$(this).addClass("hover")
-																		}).bind("mouseout",function(){
-																							$(this).removeClass("hover")
-																						});
+								$("#location-presets li, #location-city li").bind("mouseover",function(){$(this).addClass("hover")})
+																			.bind("mouseout",function(){$(this).removeClass("hover")});
 								$("#location-navi-address").bind("click",function(B){
 									A.openControls(this,"location-address");
 									B.stopPropagation()
@@ -1445,34 +1443,35 @@ eat.area.social={	dom:{},
 															A.dom.core.addClass("unlogged")
 														}
 													}
-												}},
-								login:{	dom:{},
-										data:{	username:null,
-												password:null,
-												remember:0
-										},
-										init:function(){
-													var A=this;
-													this.dom.core=$("#login");
-													this.dom.form=$("#login form");
-													this.dom.progress=$("#login-progress");
-													this.dom.usernameInput=$("#login input[@name=username]");
-													this.dom.passwordInput=$("#login input[@name=password]");
-													this.dom.rememberInput=$("#login input[@name=remember]");
-													this.dom.submitInput=$("#login-form-submit input");
-													this.dom.form.bind("submit",function(){
+												}
+						},
+					login:{	dom:{},
+							data:{	username:null,
+									password:null,
+									remember:0
+									},
+							init:function(){
+									var A=this;
+									this.dom.core=$("#login");
+									this.dom.form=$("#login form");
+									this.dom.progress=$("#login-progress");
+									this.dom.usernameInput=$("#login input[@name=username]");
+									this.dom.passwordInput=$("#login input[@name=password]");
+									this.dom.rememberInput=$("#login input[@name=remember]");
+									this.dom.submitInput=$("#login-form-submit input");
+									this.dom.form.bind("submit",function(){
 																			A.doLogin();
 																			return false
 																			})
-											},
-										doLogin:function(){
-																var A=this;
-																this.data.username=this.dom.usernameInput.val();
-																this.data.password=this.dom.passwordInput.val();
-																this.data.remember=(this.dom.rememberInput.attr("checked")?1:0);
-																this.progress("show",function(){
-																						A.dom.submitInput.attr("disabled",true);
-																						$.post(	eat.settings.ajaxLoginUrl,
+									},
+							doLogin:function(){
+									var A=this;
+									this.data.username=this.dom.usernameInput.val();
+									this.data.password=this.dom.passwordInput.val();
+									this.data.remember=(this.dom.rememberInput.attr("checked")?1:0);
+									this.progress("show",function(){
+																	A.dom.submitInput.attr("disabled",true);
+																	$.post(				eat.settings.ajaxLoginUrl,
 																						A.data,
 																						function(B){
 																							if(B.success){
@@ -1504,7 +1503,7 @@ eat.area.social={	dom:{},
 																						"json")
 																					})
 																},
-										progress:function(C,B){
+							progress:function(C,B){
 																	var A=this;
 																	if(C=="show"){
 																		this.dom.progress.fadeIn(250,B)
@@ -1514,16 +1513,16 @@ eat.area.social={	dom:{},
 																						},1000)
 																	}
 																},
-										open:function(A){
+							open:function(A){
 																this.dom.core.fadeIn(1000,A)
 													},
-										close:function(A){
+							close:function(A){
 																this.dom.core.fadeOut(1000,A)
 													}
-								},
-								activity:{	data:{items:[]},
-											dom:{},
-											init:function(){
+					},
+					activity:{	data:{items:[]},
+								dom:{},
+								init:function(){
 															this.dom.core=$("#activity");
 															this.dom.data=$("#activity-data");
 															this.dom.footer=$("#activity-footer");
@@ -1531,7 +1530,7 @@ eat.area.social={	dom:{},
 															this.dom.progress=$("#activity-progress");
 															this.pager(this.dom.pager,this.data.pager)
 														},
-											load:function(B){
+								load:function(B){
 															var A=this;
 															this.progress("show");
 															if(!B){
@@ -1549,7 +1548,7 @@ eat.area.social={	dom:{},
 																	},
 																	"json")
 														},
-											render:function(){
+								render:function(){
 															var B=this;
 															var C="";
 															if(this.data.items){
@@ -1580,7 +1579,7 @@ eat.area.social={	dom:{},
 																				B.dom.pager.fadeIn(500)
 																				})
 														},
-											pager:function(C,B){
+								pager:function(C,B){
 															var A=this;
 															if(B){C.html(B)}
 															$("a",C).click(function(D){
@@ -1591,7 +1590,7 @@ eat.area.social={	dom:{},
 																			return false
 																			})
 														},
-											progress:function(C,B){
+								progress:function(C,B){
 															var A=this;
 															if(C=="show"){
 																this.dom.progress.fadeIn(250,B)
@@ -1602,7 +1601,7 @@ eat.area.social={	dom:{},
 															}
 														}
 								},
-								recommend:{	data:{items:[]},
+					recommend:{	data:{items:[]},
 											dom:{},
 											init:function(){
 																	var A=this;
@@ -1749,7 +1748,7 @@ eat.area.social={	dom:{},
 																	}
 											}
 								}
-					};
+				};
 											
 $(document).ready(function(){
 				eat.area.social.init()

@@ -1,8 +1,6 @@
 <?php
-/** 
- * The base configurations of the WordPress.
- *
- */
+// Setting the Content-Type header with charset
+header('Content-Type: text/html; charset=utf-8');
 
 debecho("config.php enter");
 // ** MySQL settings ** //
